@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import { Button } from "../../component/Button";
 
 export default function UserList() {
@@ -8,30 +9,36 @@ export default function UserList() {
   ];
 
   const renderCard = () =>
-    users.map((user) => (
-      <div className="flex items-center justify-between p-5 bg-gray-300">
+    users.map((user, id) => (
+      <div
+        className="flex items-center justify-between p-5 bg-gray-300"
+        key={id}
+      >
         <div>
           <h3 className="text-lg font-bold text-gray-800">{user.name}</h3>
           <span className="font-normal text-gray-600">{user.email}</span>
         </div>
 
         <div className="flex gap-4">
-          <button>
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              class="h-6 w-6"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-              stroke-width="2"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"
-              />
-            </svg>
-          </button>
+          <Link to={`edit-user/${user.id}`}>
+            <button>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="w-6 h-6"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                strokeWidth="2"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"
+                />
+              </svg>
+            </button>
+          </Link>
+
           <button>
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -55,7 +62,9 @@ export default function UserList() {
   return (
     <div className="flex flex-col">
       <div className="flex justify-end">
-        <Button className="">Add user</Button>
+        <Link to="/add-user">
+          <Button className="">Add user</Button>
+        </Link>
       </div>
       <div className="grid gap-5 md:grid-cols-2">
         {users.length ? renderCard() : <p>No User</p>}

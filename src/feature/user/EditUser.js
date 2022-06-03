@@ -3,14 +3,14 @@ import { useNavigate } from "react-router-dom";
 import { Button } from "../../component/Button";
 import { TextField } from "../../component/TextField";
 
-export const AddUser = () => {
+export const EditUser = () => {
   const navigate = useNavigate();
   const [values, setValues] = useState({
     name: "",
     email: "",
   });
 
-  const handleAddUser = () => {
+  const handleEditUser = () => {
     setValues({ name: "", email: "" });
     console.log(values);
     navigate("/");
@@ -21,19 +21,17 @@ export const AddUser = () => {
         label="Name"
         value={values.name}
         onChange={(e) => setValues({ ...values, name: e.target.value })}
-        inputProps={{ type: "text", placeholder: "enter your name here" }}
+        inputProps={{ type: "text", placeholder: "Enter your name here" }}
       />
 
       <TextField
         label="Email"
         value={values.email}
         onChange={(e) => setValues({ ...values, email: e.target.value })}
-        inputProps={{ type: "email", placeholder: "enter your email here" }}
+        inputProps={{ type: "email", placeholder: "Enter your email here" }}
       />
 
-      <Button onClick={handleAddUser}>Submit</Button>
+      <Button onClick={handleEditUser}>Edit</Button>
     </div>
   );
 };
-
-// Add User
