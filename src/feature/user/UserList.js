@@ -1,12 +1,18 @@
 import React from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { Button } from "../../component/Button";
+import { deleteUser } from "./UserSlice";
 
 export default function UserList() {
-  const users = [
-    { id: "1", name: "Amanda", email: "amanda@email.com" },
-    { id: "2", name: "John", email: "john@email.com" },
-  ];
+  const dispatch = useDispatch();
+  const users = useSelector((store) => store.users);
+
+  const handleDeleteUser = (id) => {
+    dispatch(deleteUser({ id }));
+  };
+
+  console.log(users);
 
   const renderCard = () =>
     users.map((user, id) => (
@@ -39,7 +45,7 @@ export default function UserList() {
             </button>
           </Link>
 
-          <button>
+          <button onClick={() => handleDeleteUser(user.id)}>
             <svg
               xmlns="http://www.w3.org/2000/svg"
               className="w-6 h-6"
@@ -67,7 +73,13 @@ export default function UserList() {
         </Link>
       </div>
       <div className="grid gap-5 md:grid-cols-2">
-        {users.length ? renderCard() : <p>No User</p>}
+        {users.length ? (
+          renderCard()
+        ) : (
+          <div className="">
+            <p>No User</p>
+          </div>
+        )}
       </div>
     </div>
   );
